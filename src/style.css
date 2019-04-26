@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  background-color: #333;
+  color: white;
+}
+
+.app.wrong {
+  background-color: #833;
+}
+
+.app.fade {
+  background-color: #333;
+  -webkit-transition: background-color 0.25s;
+  transition:  /* Safari */ 0.25s;
+}
+
+.card {
+  margin: 0 10px;
+  width: 120px;
+  text-align: center;
+  line-height: 33vh;
+  font-size: 120px;
+}
+
+.player {
+  margin: 0 auto;
+  width: 280px;
+}
+
+.player .card {
+  display: inline-block;
+}
+
+.dealer {
+  margin: 0 auto;
+  width: 140px;
+}
+
+.actions {
+  width: 376px;
+  margin: 0 auto;
+  line-height: 33vh;
+}
+
+.button {
+  margin: 0 8px;
+  width: 78px;
+  text-align: center;
+  line-height: 80px;
+  display: inline-block;
+  font-size: 50px;
+  background-color: rgba(255, 255, 255, .1);
+}
