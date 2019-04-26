@@ -5,7 +5,7 @@ export const cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K
 function getBoard() {
   const playerCards = [sampleCard(), sampleCard()];
   const dealerCard = sampleCard();
-  
+
   // lean towards more interesting boards
   if (interestingness({ playerCards, dealerCard }) < Math.random()) return getBoard();
 
@@ -20,19 +20,19 @@ function sampleCard() {
 export function interestingness({ playerCards }) {
   // 21 is boring
   if (sumCards(playerCards) === 21) return 0;
-  
+
   // soft hands are interesting
   if (playerCards.includes('A')) return 0.5;
-  
+
   // pairs are interesting
   if (normalize(playerCards[0]) === normalize(playerCards[1])) {
     return sumCards(playerCards) === 20 ? 0.25 : 1;
   }
-  
-  // hands bellow 8 or above 17 are very boring
+
+  // hands below 8 or above 17 are very boring
   if (sumCards(playerCards) < 8) return 0.04;
   if (sumCards(playerCards) > 17) return 0.04;
-  
+
   return 0.15;
 }
 

@@ -55,6 +55,7 @@ it('calculates board interestingness', () => {
   const okay = 0.25;
   const meh = 0.15;
   const low = 0.04;
+  const lowest = 0;
   expect(interestingness({ playerCards: ['Q', '8'] })).toBe(low);
   expect(interestingness({ playerCards: ['3', '2'] })).toBe(low);
   expect(interestingness({ playerCards: ['3', '8'] })).toBe(meh);
@@ -65,4 +66,5 @@ it('calculates board interestingness', () => {
   expect(interestingness({ playerCards: ['A', 'A'] })).toBe(high);
   expect(interestingness({ playerCards: ['4', '4'] })).toBe(highest);
   expect(interestingness({ playerCards: ['2', '2'] })).toBe(highest);
+  expect(interestingness({ playerCards: ['A', 'K'] })).toBe(lowest);
 });
