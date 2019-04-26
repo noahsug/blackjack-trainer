@@ -5,7 +5,7 @@ export const cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K
 function getBoard() {
   const playerCards = [sampleCard(), sampleCard()];
   // don't generate blackjack, it's boring
-  if (sumCards(...playerCards) === 21) return getBoard();
+  if (sumCards(playerCards) === 21) return getBoard();
 
   const dealerCard = sampleCard();
   const answer = getAnswer({ dealerCard, playerCards });
@@ -20,7 +20,7 @@ function sampleCard() {
   return cards[Math.floor(Math.random() * cards.length)];
 }
 
-function interestingness({ playerCards }) {
+export function interestingness({ playerCards }) {
   if (playerCards.includes('A')) return 0.5;
   if (normalize(playerCards[0]) === normalize(playerCards[1])) {
     return sumCards(playerCards) === 20 ? 0.25 : 1;
@@ -48,18 +48,18 @@ function getRowItem([card1, card2]) {
   }
   // soft
   if (card1 === 'A' || card2 === 'A') {
-    return `S${sumCards(card1, card2)}`;
+    return `S${sumCards([card1, card2])}`;
   }
   // hard
-  return `${sumCards(card1, card2)}`;
+  return `${sumCards([card1, card2])}`;
 }
 
 function getColItem(card) {
   return `${normalize(card)}`;
 }
 
-function sumCards(card1, card2) {
-  return cardValue(card1) + cardValue(card2);
+function sumCards(cards) {
+  return cards.reduce((sum, card) => sum + cardValue(card), 0);
 }
 
 function cardValue(card) {

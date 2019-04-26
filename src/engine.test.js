@@ -1,4 +1,4 @@
-import engine, { cards, getAnswer } from './engine';
+import engine, { cards, getAnswer, interestingness } from './engine';
 
 it('generates player two cards', () => {
   const { playerCards } = engine.getBoard();
@@ -47,4 +47,22 @@ it('generates answers', () => {
   expect(getAnswer({ dealerCard: 'A', playerCards: ['A', 'A'] })).toBe('P');
   expect(getAnswer({ dealerCard: 'A', playerCards: ['A', 'A'] })).toBe('P');
   expect(getAnswer({ dealerCard: '6', playerCards: ['Q', 'J'] })).toBe('S');
+});
+
+it('calculates board interestingness', () => {
+  const highest = 1;
+  const high = 0.5;
+  const okay = 0.25;
+  const meh = 0.15;
+  const low = 0.04;
+  expect(interestingness({ playerCards: ['Q', '8'] })).toBe(low);
+  expect(interestingness({ playerCards: ['3', '2'] })).toBe(low);
+  expect(interestingness({ playerCards: ['3', '8'] })).toBe(meh);
+  expect(interestingness({ playerCards: ['3', '5'] })).toBe(meh);
+  expect(interestingness({ playerCards: ['J', 'Q'] })).toBe(okay);
+  expect(interestingness({ playerCards: ['10', '10'] })).toBe(okay);
+  expect(interestingness({ playerCards: ['A', '2'] })).toBe(high);
+  expect(interestingness({ playerCards: ['A', 'A'] })).toBe(high);
+  expect(interestingness({ playerCards: ['4', '4'] })).toBe(highest);
+  expect(interestingness({ playerCards: ['2', '2'] })).toBe(highest);
 });
